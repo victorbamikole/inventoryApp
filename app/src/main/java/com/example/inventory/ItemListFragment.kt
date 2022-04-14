@@ -31,7 +31,7 @@ import com.example.inventory.databinding.ItemListFragmentBinding
  */
 class ItemListFragment : Fragment() {
     private val viewModel: InventoryViewModel by activityViewModels {
-        InventoryViewModel.InventoryViewModelFactory(
+        InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database.itemDao()
         )
     }
@@ -58,6 +58,7 @@ class ItemListFragment : Fragment() {
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.recyclerView.adapter = adapter
+
         // Attach an observer on the allItems list to update the UI automatically when the data
         // changes.
         viewModel.allItems.observe(this.viewLifecycleOwner) { items ->

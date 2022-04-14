@@ -35,7 +35,7 @@ import com.example.inventory.databinding.FragmentAddItemBinding
 class AddItemFragment : Fragment() {
 
     private val viewModel: InventoryViewModel by activityViewModels {
-        InventoryViewModel.InventoryViewModelFactory(
+        InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database
                 .itemDao()
         )
