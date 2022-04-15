@@ -5,50 +5,6 @@ import com.example.data.Item
 import com.example.data.ItemDao
 import kotlinx.coroutines.launch
 
-//class InventoryViewModel(private val itemDao: ItemDao): ViewModel() {
-//
-//    val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
-//
-//    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
-//        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
-//        insertItem(newItem)
-//    }
-//
-//    private fun insertItem(item: Item) {
-//        viewModelScope.launch {
-//            itemDao.insert(item)
-//        }
-//    }
-//
-//
-//    fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
-//        if (itemName.isBlank() || itemPrice.isBlank() || itemCount.isBlank()) {
-//            return false
-//        }
-//        return false
-//    }
-//
-//    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
-//        return Item(
-//            itemName = itemName,
-//            itemPrice = itemPrice.toDouble(),
-//            quantityInStock = itemCount.toInt()
-//        )
-//
-//    }
-//
-//    class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory {
-//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//            if (modelClass.isAssignableFrom(InventoryViewModel::class.java)) {
-//                @Suppress("UNCHECKED_CAST")
-//                return InventoryViewModel(itemDao) as T
-//            }
-//            throw IllegalArgumentException("Unknown ViewModel class")
-//        }
-//
-//    }
-//}
-
 /**
  * View Model to keep a reference to the Inventory repository and an up-to-date list of all items.
  *
@@ -77,7 +33,6 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount)
         updateItem(updatedItem)
     }
-
 
     /**
      * Launching a new coroutine to update an item in a non-blocking way
@@ -154,6 +109,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         )
     }
 
+
     /**
      * Called to update an existing entry in the Inventory database.
      * Returns an instance of the [Item] entity class with the item info updated by the user.
@@ -185,3 +141,48 @@ class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvide
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+
+//class InventoryViewModel(private val itemDao: ItemDao): ViewModel() {
+//
+//    val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
+//
+//    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
+//        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+//        insertItem(newItem)
+//    }
+//
+//    private fun insertItem(item: Item) {
+//        viewModelScope.launch {
+//            itemDao.insert(item)
+//        }
+//    }
+//
+//
+//    fun isEntryValid(itemName: String, itemPrice: String, itemCount: String): Boolean {
+//        if (itemName.isBlank() || itemPrice.isBlank() || itemCount.isBlank()) {
+//            return false
+//        }
+//        return false
+//    }
+//
+//    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
+//        return Item(
+//            itemName = itemName,
+//            itemPrice = itemPrice.toDouble(),
+//            quantityInStock = itemCount.toInt()
+//        )
+//
+//    }
+//
+//    class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory {
+//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//            if (modelClass.isAssignableFrom(InventoryViewModel::class.java)) {
+//                @Suppress("UNCHECKED_CAST")
+//                return InventoryViewModel(itemDao) as T
+//            }
+//            throw IllegalArgumentException("Unknown ViewModel class")
+//        }
+//
+//    }
+//}
